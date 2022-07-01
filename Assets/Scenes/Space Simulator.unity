@@ -658,6 +658,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cam3rdPerson: {fileID: 1577988426}
   _directorIdle: {fileID: 1014523071}
+  _timeToIdle: 5
+  _idle: -1
 --- !u!114 &245706147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3009,9 +3011,7 @@ MonoBehaviour:
   m_Follow: {fileID: 245706145}
   m_ShowDebugText: 0
   m_Loop: 0
-  m_ChildCameras:
-  - {fileID: 632373903}
-  - {fileID: 815769065}
+  m_ChildCameras: []
   m_Instructions:
   - m_VirtualCamera: {fileID: 632373903}
     m_Hold: 1
