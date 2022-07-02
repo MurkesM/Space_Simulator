@@ -5,17 +5,17 @@ using UnityEngine;
 public class ShipControls : MonoBehaviour
 {
     [SerializeField] private float _rotSpeed;
-    [SerializeField] private float _moveSpeed;
+   // [SerializeField] private float _moveSpeed;
     [SerializeField] private float _currentSpeed;
     private float _vertical;
     private float _horizontal;
-    [SerializeField] private float _maxRotate;
-    [SerializeField] private GameObject _shipModel;
+    //[SerializeField] private float _maxRotate;
+    //[SerializeField] private GameObject _shipModel;
 
     // Start is called before the first frame update
     void Start()
     {
-        _currentSpeed = 1;
+        //_currentSpeed = 1;
     }
 
     // Update is called once per frame
@@ -29,23 +29,32 @@ public class ShipControls : MonoBehaviour
         _vertical = Input.GetAxis("Vertical");
         _horizontal = Input.GetAxis("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            _currentSpeed++;
-            if (_currentSpeed > 4)
-            {
-                _currentSpeed = 4;
-            }
-        }//increase speed
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    _currentSpeed++;
+        //    if (_currentSpeed > 4)
+        //    {
+        //        _currentSpeed = 4;
+        //    }
+        //}//increase speed
 
-        if (Input.GetKeyDown(KeyCode.G))
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    _currentSpeed--;
+        //    if (_currentSpeed < 1)
+        //    {
+        //        _currentSpeed = 1;
+        //    }
+        //}//decrease speed
+
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            _currentSpeed--;
-            if (_currentSpeed < 1)
-            {
-                _currentSpeed = 1;
-            }
-        }//decrease speed
+            _currentSpeed = 30;
+        }
+        else
+        {
+            _currentSpeed = 5;
+        }
 
         Vector3 rotateH = new Vector3(0, _horizontal, 0);
         transform.Rotate(rotateH * _rotSpeed * Time.deltaTime);
