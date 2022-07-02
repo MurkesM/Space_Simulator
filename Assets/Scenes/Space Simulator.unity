@@ -613,9 +613,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 245706145}
+  - component: {fileID: 245706148}
   - component: {fileID: 245706146}
   - component: {fileID: 245706147}
-  - component: {fileID: 245706148}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -658,8 +658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cam3rdPerson: {fileID: 1577988426}
   _directorIdle: {fileID: 1014523071}
-  _timeToIdle: 5
-  _idle: -1
+  _timeToIdle: 0
 --- !u!114 &245706147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2263,7 +2262,10 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_ShowDebugText: 0
   m_Loop: 0
-  m_ChildCameras: []
+  m_ChildCameras:
+  - {fileID: 107562802}
+  - {fileID: 80366871}
+  - {fileID: 1907967383}
   m_Instructions:
   - m_VirtualCamera: {fileID: 107562802}
     m_Hold: 1
@@ -3011,7 +3013,9 @@ MonoBehaviour:
   m_Follow: {fileID: 245706145}
   m_ShowDebugText: 0
   m_Loop: 0
-  m_ChildCameras: []
+  m_ChildCameras:
+  - {fileID: 632373903}
+  - {fileID: 815769065}
   m_Instructions:
   - m_VirtualCamera: {fileID: 632373903}
     m_Hold: 1
