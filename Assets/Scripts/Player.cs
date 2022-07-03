@@ -19,11 +19,34 @@ public class Player : MonoBehaviour
 
     [SerializeField] ParticleSystem _leftFire;
     [SerializeField] ParticleSystem _rightFire;
-   //[SerializeField] AudioSource _audioSource;
-   //[SerializeField] AudioClip _engineThusters;
+    //[SerializeField] AudioSource _audioSource;
+    //[SerializeField] AudioClip _engineThusters;
+
+    [SerializeField] GameObject _explosion;
+    [SerializeField] Vector3 _offset;
+    [SerializeField] bool _explode = false;
+
+    [SerializeField] int _lives = 3;
+
+    [SerializeField] Collider _collider;
+
+    [SerializeField] Transform _shipModel;
+
+    bool _canExplode = true;
 
     void Update()
     {
+        _offset = _shipModel.position;
+
+        //if (Input.GetKeyDown(KeyCode.E))
+        //    KillPlayer();
+
+        if (_lives <= 0 && _canExplode == true)
+        {
+            _canExplode = false;
+             KillPlayer();
+        }
+
         if (_canMove == true)
         {
             HandleMovement();
@@ -37,12 +60,12 @@ public class Player : MonoBehaviour
         if (other.tag == "Bounds")
         {
             _timeToIdle = 0;
-            Debug.Log("Player has entered the playable area!");
         }
 
         if (other.tag == "Asteroid")
         {
-            Debug.Log("Players dead");
+            _lives--;
+            Destroy(other.gameObject);
         }
     }
 
@@ -50,7 +73,7 @@ public class Player : MonoBehaviour
     {
         if (other.tag == "Bounds")
         {
-            Debug.Log("Player out of bounds!");
+            KillPlayer();
         }
     }
 
@@ -68,7 +91,7 @@ public class Player : MonoBehaviour
 
     void HandleIdleState()
     {
-        if (Input.anyKey)
+        if (Input.anyKey || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
             _timeToIdle = 0;
         }
@@ -124,4 +147,29 @@ public class Player : MonoBehaviour
         _canMove = true;
     }
 
+    void KillPlayer()
+    {
+        if (_collider != null)
+            _collider.enabled = false;
+        
+        _explode = true;
+        _canMove = false;
+
+        StartCoroutine(ExplosionRoutine());
+        Destroy(gameObject, 3);
+    }
+
+    IEnumerator ExplosionRoutine()
+    {
+        while (_explode == true)
+        {
+            Instantiate(_explosion, _offset, Quaternion.identity);
+            yield return new WaitForSeconds(0.75f);
+            Instantiate(_explosion, _offset, Quaternion.identity);
+            yield return new WaitForSeconds(0.75f);
+            Instantiate(_explosion, _offset, Quaternion.identity);
+            yield return new WaitForSeconds(0.75f);
+            _explode = false;
+        }
+    }
 }
