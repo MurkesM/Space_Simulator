@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CustomBlends:
   - m_From: CamCockpit
-    m_To: CM FreeLook1
+    m_To: Cam3rdPerson
     m_Blend:
       m_Style: 0
       m_Time: 2
@@ -24,7 +24,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: CM FreeLook1
+  - m_From: Cam3rdPerson
     m_To: CamCockpit
     m_Blend:
       m_Style: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: Cam (Idle)
-    m_To: CM FreeLook1
+    m_To: Cam3rdPerson
     m_Blend:
       m_Style: 1
       m_Time: 0.5
