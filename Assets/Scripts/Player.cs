@@ -6,7 +6,8 @@ using UnityEngine.Playables;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] CinemachineVirtualCamera _cam3rdPerson;
+    //[SerializeField] CinemachineVirtualCamera _cam3rdPerson;
+    [SerializeField] CinemachineFreeLook _cam3rdPerson;
     [SerializeField] GameObject _directorIdle;
     [SerializeField] float _timeToIdle = 5;
 
@@ -37,6 +38,11 @@ public class Player : MonoBehaviour
         {
             _timeToIdle = 0;
             Debug.Log("Player has entered the playable area!");
+        }
+
+        if (other.tag == "Asteroid")
+        {
+            Debug.Log("Players dead");
         }
     }
 
