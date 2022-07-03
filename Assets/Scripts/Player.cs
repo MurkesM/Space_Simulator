@@ -9,28 +9,42 @@ public class Player : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera _cam3rdPerson;
     [SerializeField] GameObject _directorIdle;
     [SerializeField] float _timeToIdle = 5;
-    //[SerializeField] Transform _shipModal;
 
     [SerializeField] private float _rotSpeed = 5;
     [SerializeField] private float _currentSpeed = 5;
     [SerializeField] bool _canMove;
     private float _vertical;
     private float _horizontal;
-    
+
+    [SerializeField] ParticleSystem _leftFire;
+    [SerializeField] ParticleSystem _rightFire;
+   //[SerializeField] AudioSource _audioSource;
+   //[SerializeField] AudioClip _engineThusters;
+
     void Update()
     {
         if (_canMove == true)
+        {
             HandleMovement();
-
-        SwitchCams();
-        HandleIdleState();
+            SwitchCams();
+            HandleIdleState();
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Bounds")
         {
-            Debug.Log("Out of bounds!");
+            _timeToIdle = 0;
+            Debug.Log("Player has entered the playable area!");
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Bounds")
+        {
+            Debug.Log("Player out of bounds!");
         }
     }
 
@@ -78,10 +92,14 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             _currentSpeed = 30;
+            _leftFire.Play();
+            _rightFire.Play();
         }
         else
         {
             _currentSpeed = 5;
+            _leftFire.Stop();
+            _rightFire.Stop();
         }
 
         Vector3 rotateH = new Vector3(0, _horizontal, 0);
@@ -100,27 +118,4 @@ public class Player : MonoBehaviour
         _canMove = true;
     }
 
-    //void HandlePlayableArea()
-    //{
-    //    //X bounds
-    //    if (_shipModal.position.x >= -2647.0f)
-    //        _shipModal.position = new Vector3(-2647.0f, transform.position.y, transform.position.z);
-
-    //    if (_shipModal.position.x <= -4500.8f)
-    //        _shipModal.position = new Vector3(-4500.8f, transform.position.y, transform.position.z);
-
-    //    //Y bounds
-    //    if (_shipModal.position.y > 34.5f)
-    //        _shipModal.position = new Vector3(transform.position.x, 34.5f, transform.position.z);
-
-    //    if (_shipModal.position.y < -53.1f)
-    //        _shipModal.position = new Vector3(transform.position.x, -53.1f, transform.position.z);
-
-    //    //Z bounds
-    //    if (_shipModal.position.z >= -2526.4f)
-    //        _shipModal.position = new Vector3(transform.position.x, transform.position.y, -2526.4f);
-
-    //    if (_shipModal.position.z <= -2791.2f)
-    //        _shipModal.position = new Vector3(transform.position.x, transform.position.y, -2791.2f);
-    //}
 }
