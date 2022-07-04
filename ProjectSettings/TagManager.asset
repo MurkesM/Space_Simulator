@@ -7,6 +7,7 @@ TagManager:
   - Bounds
   - Asteroid
   - Director1
+  - Director2
   layers:
   - Default
   - TransparentFX

@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform _shipModel;
 
     [SerializeField] PlayableDirector _shipDirector;
+    [SerializeField] PlayableDirector _endDirector;
 
     bool _canExplode = true;
 
@@ -73,6 +74,11 @@ public class Player : MonoBehaviour
         if (other.tag == "Director1")
         {
             _shipDirector.enabled = true;
+        }
+       
+        if (other.tag == "Director2")
+        {
+            _endDirector.enabled = true;
         }
     }
 
