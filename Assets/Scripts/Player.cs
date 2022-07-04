@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] Transform _shipModel;
 
+    [SerializeField] PlayableDirector _shipDirector;
+
     bool _canExplode = true;
 
     void Update()
@@ -66,6 +68,11 @@ public class Player : MonoBehaviour
         {
             _lives--;
             Destroy(other.gameObject);
+        }
+
+        if (other.tag == "Director1")
+        {
+            _shipDirector.enabled = true;
         }
     }
 
