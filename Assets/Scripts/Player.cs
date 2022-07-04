@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
     [SerializeField] PlayableDirector _shipDirector;
     [SerializeField] PlayableDirector _endDirector;
 
+    [SerializeField] GameManager _gameManager;
+
     bool _canExplode = true;
 
     void Update()
@@ -172,6 +174,7 @@ public class Player : MonoBehaviour
         _explode = true;
         _canMove = false;
 
+        _gameManager.GameOver();
         StartCoroutine(ExplosionRoutine());
         Destroy(gameObject, 3);
     }
