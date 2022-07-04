@@ -79,6 +79,10 @@ public class Player : MonoBehaviour
         if (other.tag == "Director2")
         {
             _endDirector.enabled = true;
+            _canMove = false;
+            _leftFire.Play();
+            _rightFire.Play();
+            _collider.enabled = false;
         }
     }
 
