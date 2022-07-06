@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     //[SerializeField] AudioSource _audioSource;
     //[SerializeField] AudioClip _engineThusters;
 
-    [SerializeField] GameObject _explosion;
+    [SerializeField] ParticleSystem _explosion;
     [SerializeField] Vector3 _offset;
     [SerializeField] bool _explode = false;
 
@@ -36,6 +36,11 @@ public class Player : MonoBehaviour
     [SerializeField] PlayableDirector _endDirector;
 
     [SerializeField] GameManager _gameManager;
+
+    [SerializeField] AudioSource _audioSource;
+    //[SerializeField] AudioClip _explosionClip;
+
+    [SerializeField] CameraShake _cameraShake;
 
     bool _canExplode = true;
 
@@ -69,7 +74,11 @@ public class Player : MonoBehaviour
 
         if (other.tag == "Asteroid")
         {
-            _lives--;
+            _cameraShake.Shake();
+
+            if (_lives > 0)
+                _lives--;
+
             Destroy(other.gameObject);
         }
 
@@ -92,17 +101,18 @@ public class Player : MonoBehaviour
     {
         if (other.tag == "Bounds")
         {
+            _cameraShake.Shake();
             KillPlayer();
         }
     }
 
     void SwitchCams()
     {
-        if (Input.GetKeyDown(KeyCode.R) && _cam3rdPerson.enabled == true)
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.JoystickButton3) && _cam3rdPerson.enabled == true)
         {
             _cam3rdPerson.enabled = false;
         }
-        else if (Input.GetKeyDown(KeyCode.R) && _cam3rdPerson.enabled == false)
+        else if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.JoystickButton3) && _cam3rdPerson.enabled == false)
         {
             _cam3rdPerson.enabled = true;
         }
@@ -110,7 +120,8 @@ public class Player : MonoBehaviour
 
     void HandleIdleState()
     {
-        if (Input.anyKey || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+        if (Input.anyKey || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 ||
+            Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             _timeToIdle = 0;
         }
@@ -137,7 +148,7 @@ public class Player : MonoBehaviour
         _vertical = Input.GetAxis("Vertical");
         _horizontal = Input.GetAxis("Horizontal");
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.JoystickButton5))
         {
             _currentSpeed = 30;
             _leftFire.Play();
@@ -148,6 +159,11 @@ public class Player : MonoBehaviour
             _currentSpeed = 15;
             _leftFire.Stop();
             _rightFire.Stop();
+        }
+
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton4))
+        {
+            _currentSpeed = 5;
         }
 
         Vector3 rotateH = new Vector3(0, _horizontal, 0);
@@ -183,12 +199,21 @@ public class Player : MonoBehaviour
     {
         while (_explode == true)
         {
+            _audioSource.Play();
+            _cameraShake.Shake();
             Instantiate(_explosion, _offset, Quaternion.identity);
             yield return new WaitForSeconds(0.75f);
+
+            _audioSource.Play();
+            _cameraShake.Shake();
             Instantiate(_explosion, _offset, Quaternion.identity);
             yield return new WaitForSeconds(0.75f);
+
+            _audioSource.Play();
+            _cameraShake.Shake();
             Instantiate(_explosion, _offset, Quaternion.identity);
             yield return new WaitForSeconds(0.75f);
+           
             _explode = false;
         }
     }
