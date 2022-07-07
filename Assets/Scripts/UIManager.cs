@@ -40,4 +40,9 @@ public class UIManager : MonoBehaviour
     {
         _canvasIntro.enabled = true;
     }
+
+    public void ExitApp()
+    {
+        Application.Quit();
+    }
 }
