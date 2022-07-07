@@ -1,13 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Asteroids : MonoBehaviour
 {
-    //if player collides with asteroid then the player dies.
-    //asteroids should rotate, Some slower, some faster
-    //asteroids should move, Some slower, some faster, in random directions
-
     float _randomRotateSpeed = 5;
     float _randomX;
     float _randomY;

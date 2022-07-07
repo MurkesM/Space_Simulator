@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.Playables;
@@ -7,20 +6,19 @@ using UnityEngine.Playables;
 public class Player : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera _cam3rdPerson;
-    //[SerializeField] CinemachineFreeLook _cam3rdPerson;
+    [SerializeField] CameraShake _cameraShake;
+
     [SerializeField] GameObject _directorIdle;
     [SerializeField] float _timeToIdle = 5;
 
-    [SerializeField] private float _rotSpeed = 5;
-    [SerializeField] private float _currentSpeed = 5;
+    [SerializeField] float _rotSpeed = 5;
+    [SerializeField] float _currentSpeed = 5;
     [SerializeField] bool _canMove;
-    private float _vertical;
-    private float _horizontal;
+    float _vertical;
+    float _horizontal;
 
     [SerializeField] ParticleSystem _leftFire;
     [SerializeField] ParticleSystem _rightFire;
-    //[SerializeField] AudioSource _audioSource;
-    //[SerializeField] AudioClip _engineThusters;
 
     [SerializeField] ParticleSystem _explosion;
     [SerializeField] Vector3 _offset;
@@ -38,18 +36,12 @@ public class Player : MonoBehaviour
     [SerializeField] GameManager _gameManager;
 
     [SerializeField] AudioSource _audioSource;
-    //[SerializeField] AudioClip _explosionClip;
-
-    [SerializeField] CameraShake _cameraShake;
 
     bool _canExplode = true;
 
     void Update()
     {
         _offset = _shipModel.position;
-
-        //if (Input.GetKeyDown(KeyCode.E))
-        //    KillPlayer();
 
         if (_lives <= 0 && _canExplode == true)
         {
