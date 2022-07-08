@@ -100,13 +100,13 @@ public class Player : MonoBehaviour
 
     void SwitchCams()
     {
-        if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.JoystickButton3) && _cam3rdPerson.enabled == true)
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.JoystickButton3))
         {
-            _cam3rdPerson.enabled = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.JoystickButton3) && _cam3rdPerson.enabled == false)
-        {
-            _cam3rdPerson.enabled = true;
+            if (_cam3rdPerson.enabled == true)
+                _cam3rdPerson.enabled = false;
+           
+            else if (_cam3rdPerson.enabled == false)
+                _cam3rdPerson.enabled = true;
         }
     }
 

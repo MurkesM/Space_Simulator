@@ -1903,7 +1903,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 229797209}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3192,17 +3192,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Objective: Relax, take in the view, enjoy the music.
-
-
-    Just remember,
+  m_Text: "Objective: Relax, take in the view, enjoy the music.\n\nJust remember,
     the only way to leave the asteroid field is to make it all the way through and
-    out the other side. You will explode if you try to go anywhere else. I also wouldn''t
-    hit to many asteroids...
-
-
-
-'
+    out the other side. \n\nAlso I'd avoid the asteroids if I were you..\n"
 --- !u!222 &1604324750
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3313,9 +3305,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0fc4d400162e72140a40e160d29fb604, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 714dd34b06176ab4489b6dbd888d6755, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 1
   Mute: 0
